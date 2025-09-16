@@ -6,7 +6,9 @@ Bunyad Chaudhary – www.linkedin.com/in/bunyad-chaudhary-730854280
 This repository contains the implementation and supporting material for the research paper:
 
 Strategic Solar Deployment in India: Leveraging Machine Learning for Site Localization
+<br>
 Main Author: Bunyad Chaudhary
+<br>
 Accepted at the 16th International Conference on Computing, Communication and Networking Technologies (ICCCNT 2025), IIT Indore, India.
 
 The project explores data-driven solar site selection across Indian states and union territories using a custom-built dataset, autoencoder-based dimensionality reduction, clustering, and predicate-driven ranking. It provides interpretable insights for policymakers and a replicable framework for renewable energy planning.
