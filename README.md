@@ -11,124 +11,114 @@ Main Author: Bunyad Chaudhary
 <br>
 Accepted at the 16th International Conference on Computing, Communication and Networking Technologies (ICCCNT 2025), IIT Indore, India.
 
-The project explores data-driven solar site selection across Indian states and union territories using a custom-built dataset, autoencoder-based dimensionality reduction, clustering, and predicate-driven ranking. It provides interpretable insights for policymakers and a replicable framework for renewable energy planning.
+📌 Project Overview
 
-🔑 Objectives
+India’s rapid growth in energy demand calls for scalable, efficient, and sustainable solar energy deployment. However, existing site selection methods often suffer from:
 
-Identify optimal states for large-scale solar power plant deployment in India.
+✅ Subjectivity – GIS-AHP/MCDM approaches depend on manual weightings.
 
-Move beyond subjective GIS–AHP or opaque black-box ML models by offering transparent, data-driven analysis.
+✅ Opacity – Black-box ML models provide little interpretability for policymakers.
 
-Balance supply-side factors (solar irradiance, potential, wind speed) with demand-side factors (population density, energy consumption).
+✅ Narrow scope – Many studies neglect demand-side factors like population and energy consumption.
 
-Provide a scalable, adaptable methodology that can be applied to other regions or renewable technologies.
-<br>
+This project proposes a fully data-driven, interpretable framework that integrates environmental, technical, and demographic criteria to rank Indian states and union territories for solar power plant deployment.
+
+By combining autoencoder-based feature extraction, K-Means clustering, and a predicate-driven ranking system, we deliver both statistical rigor and policy-friendly insights.
+
+🎯 Objectives
+
+Develop a transparent and scalable methodology for solar site localization.
+
+Balance supply-side resources (irradiance, solar potential, wind speed) with demand-side needs (population, consumption).
+
+Use machine learning (autoencoders + clustering) to extract hidden structures in the data.
+
+Provide interpretable outputs that policymakers, investors, and researchers can rely on.
+
+Create a replicable framework adaptable to other countries and renewable energy domains.
 
 📊 Dataset
 
-A 5-year dataset (2019–2023) was curated covering 29 states and 8 union territories of India.
-Features include:
+A five-year dataset (2019–2023) was compiled across 29 Indian states and 8 union territories.
 
-🌞 Global Horizontal Irradiance (GHI, W/m²)
+Features considered:
 
-👥 Population Density
+🌞 Solar Irradiance (GHI, W/m²) – sunlight availability.
+🔋 Solar Potential (MW) – maximum estimated generation capacity.
+⚡ Energy Consumption (kWh per capita) – demand-side requirement.
+👥 Population Density – electricity distribution and demand load.
+💨 Wind Speed (m/s) – secondary environmental impact on solar efficiency.
 
-⚡ Energy Consumption (kWh per capita)
-
-🔋 Solar Potential (MW)
-
-💨 Wind Speed (m/s)
-
-Data was normalized, pre-processed, and evaluated against statistically derived thresholds.
-<br>
+The dataset underwent:
+Data cleaning (removal of missing values).
+Normalization using StandardScaler.
+Latent feature extraction with an Autoencoder to reduce noise and overfitting.
 
 🧠 Methodology
 
-Preprocessing
+1. Data Preprocessing
+Normalized features to eliminate scale bias.
+Handled missing values using imputation.
 
-Data cleaning, missing value imputation, and normalization with StandardScaler.
+2. Autoencoder for Feature Extraction
+Architecture: Input → Hidden Layers → 2D Latent Space → Decoder.
+Trained for 50 epochs using SGD optimizer.
+Captured nonlinear patterns and temporal interactions missed by PCA.
 
-Feature Reduction with Autoencoder
+3. Clustering (K-Means + Elbow Method)
+Determined optimal k = 4 using the Elbow Method.
+Grouped states based on energy-environmental similarity.
+Visualized results with Parallel Coordinate Plots.
 
-Extracted latent features from the dataset.
+4. Predicate-Driven Ranking
+Defined low, medium, high thresholds for each parameter (based on statistical distribution).
+Example:
+GHI < 642.2 → Low | 642.2–824.6 → Medium | >824.6 → High
+Wind Speed < 3.76 → Favorable | >5.38 → Unfavorable
+Counted satisfied predicates → assigned categories:
 
-Reduced overfitting and captured hidden spatio-temporal interactions beyond PCA.
+⭐ Most Favorable (5/5 predicates)
 
-Clustering (K-Means + Elbow Method)
+🔴 Highly Favorable (4/5)
 
-Determined optimal number of clusters.
+🟠 Moderately Favorable (3/5)
 
-Classified states into groups with similar energy and demographic characteristics.
+🟡 Favorable (2/5)
 
-Predicate-Based Evaluation
+🟤 Less Favorable (1/5)
 
-Defined quantitative ranges (low, medium, high) for each parameter.
+⚪ Least Favorable (0/5)
 
-Counted satisfied predicates per state to assign categories:
+5. Visualization & Insights
+Correlation Heatmaps showed strong links (Population ↔ Energy Consumption, r=+0.79).
+Cluster Plots revealed groupings of high vs. low solar potential states.
+Ranking Map (color-coded by category) provided quick decision support.
 
-Most Favorable
+🏆 Key Findings
 
-Highly Favorable
+Most Favorable States (5/5): Rajasthan, Gujarat, Maharashtra
+High GHI, high solar potential, strong demand, low wind speed.
 
-Moderately Favorable
+Highly Favorable States (4/5): Karnataka, Tamil Nadu, Andhra Pradesh, Telangana
+Robust solar potential and demand, with manageable environmental trade-offs.
 
-Favorable
+Moderately Favorable (3/5): Madhya Pradesh, Uttar Pradesh, Odisha, Chhattisgarh
+Potential for community solar grids with policy support.
 
-Less Favorable
+Favorable/Less Favorable: Bihar, Kerala, Jharkhand, West Bengal
+Limited irradiance/land, but good for rooftop solar and microgrids.
 
-Least Favorable
-
-Visualization
-
-Parallel Coordinate Plots
-
-Feature Correlation Heatmaps
-
-State Rankings
-
-🏆 Key Results
-
-Most Favorable States: Rajasthan, Gujarat, Maharashtra
-
-Highly Favorable States: Karnataka, Tamil Nadu, Andhra Pradesh, Telangana
-
-Moderately Favorable: Madhya Pradesh, Uttar Pradesh, Odisha, Chhattisgarh
-
-States like Bihar, Kerala, and West Bengal show potential for rooftop solar / microgrid solutions.
-
-North-eastern states (e.g., Meghalaya, Nagaland, Arunachal Pradesh) are less favorable for large-scale projects but suitable for decentralized/off-grid innovations.
-
-This aligns closely with India’s national solar deployment targets, while providing interpretable justifications for ranking.
+Least Favorable: Meghalaya, Nagaland, Arunachal Pradesh
+Challenged by cloud cover, low irradiance, poor grid connectivity.
+Suitable for off-grid portable solar and microgrids.
 
 🚀 Getting Started
-Prerequisites
-
-Python 3.9+
-
-Jupyter Notebook
-
-Required libraries:
-
-pip install numpy pandas scikit-learn matplotlib seaborn
-
-Running the Notebook
-
-Clone the repository:
-
+1. Clone Repository
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
 
+2. Install Dependencies
+pip install numpy pandas scikit-learn matplotlib seaborn
 
-Launch Jupyter Notebook:
-
+3. Run Notebook
 jupyter notebook prac_mini_pro.ipynb
-
-
-Run all cells to reproduce analysis, visualizations, and rankings.
-
-📂 Repository Structure
-├── prac_mini_pro.ipynb    # Main implementation notebook
-├── 16th_ICCCNT_2025_paper_5471.pdf   # Accepted IEEE research paper
-└── README.md              # Project documentation
-and many other imp files
-
