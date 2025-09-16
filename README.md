@@ -22,6 +22,7 @@ Move beyond subjective GIS–AHP or opaque black-box ML models by offering trans
 Balance supply-side factors (solar irradiance, potential, wind speed) with demand-side factors (population density, energy consumption).
 
 Provide a scalable, adaptable methodology that can be applied to other regions or renewable technologies.
+<br>
 
 📊 Dataset
 
@@ -39,6 +40,7 @@ Features include:
 💨 Wind Speed (m/s)
 
 Data was normalized, pre-processed, and evaluated against statistically derived thresholds.
+<br>
 
 🧠 Methodology
 
